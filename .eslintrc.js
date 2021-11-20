@@ -25,6 +25,7 @@ module.exports = {
   ],
   rules: {
     'no-console': 0,
-    "react/jsx-filename-extension": "off"
+    "react/jsx-filename-extension": "off",
+    "allowForLoopAfterthoughts": true
   },
 };
