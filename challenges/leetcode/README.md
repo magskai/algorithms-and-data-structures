@@ -42,6 +42,7 @@ At `i === 4`:
 ### Complexity
 We visit every character in the input string `s`.
 
-In the worst case, every character is unique, so we store every one in the table of seen characters.
+In the worst case, every character is unique, so they each require a new entry in the map of seen
+characters.
 
-Therefore, both the time and space complexity are **`O(n)`** where `n` is equal to the length of `s`.****
+Therefore, both the time and space complexity are **`O(n)`** where `n` is equal to the length of `s`.
