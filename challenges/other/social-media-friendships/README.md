@@ -1,3 +1,9 @@
+# Social Media Friendships
+
+This was a challenge that a friend of mine was given while interviewing at a social media company.
+
+I like it because it's not very tricky, and leans more on practical thinking.
+
 ## Challenge
 You work on a social media platform. You have CSV log files containing data about friendship transactions between users.
 
@@ -22,10 +28,11 @@ An array of arrays of user pairs\
 
 #### Example
 
-`dankboi` and `dankgoat` are friends.\
-`pancake` and `blarpie` are friends.
+`appa` and `momo` are friends.\
+`hiphopapotamus` and `rhymenocerous` are friends.
 
-`[['dankboi', 'dankgoat'], ['pancake', 'blarpie']]`
+Output:\
+`[['appa', 'momo'], ['hiphopapotamus', 'rhymenocerous']]`
 
 #### Considerations
 
@@ -52,6 +59,14 @@ We can instead read the logs line by line, and do something with each row.
   *"remove"* transaction.
 
 2. From `accept.csv`, create an array of unique user pairs who not have a more recent timestamp in our friendship removal lookup table.
+
+I generated the key by joining the usernames with a non-username delimiter character. The
+delimiter guards against the edge case where two unique user pairs concatenate to the same result
+(e.g. `['aaa', 'bb']` and `['aa', 'abb']` both create `aaabb`).
+
+To ensure constant key length, we can add a hashing step after the join. I omitted it for
+simplicity. We can also assume that usernames have a relatively modest character limit, so the
+keys have an upper bound of how long they can become.
 
 #### Complexity
 
