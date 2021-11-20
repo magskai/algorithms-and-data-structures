@@ -1,65 +1,8 @@
-/*
-You work on a social media platform.
-You have CSV log files containing data about friend transactions between users.
-Find all active friendships.
-
-The log files are:
-  - request.csv
-  - remove.csv
-  - accept.csv
-  - reject.csv
-
-Each log file contains 3 columns:
-  - user1
-  - user2
-  - timestamp
-
-Expected output:
-An array of arrays of user pairs: i.e. [[user1, user2]]
-
-Example:
-  - dankboi and dankgoat are friends
-  - pancake and blarp are friends
-  Result: [['dankboi', 'dankgoat'], ['pancake', 'blarp']]
-
-Considerations:
-  - The logs are not guaranteed to be in order
-  - Result cannot contain duplicates
-  - The data is clean: every field is populated with valid values, no logs are missing
-*/
-
-/*
-THOUGHTS
-  An active friendship can be defined:
-    - There exists a request between 2 users that was accepted.
-    - There does not exist a remove transaction more recent than the latest accept transaction.
-
-    Therefore, we only need to care about accept.csv and remove.csv
-
-  One approach would be to sort both log files and step through, but we can easily assume that
-  these files can be very large. We do not want to load them from disk into memory unless we
-  want a great sadness to fall upon our machine.
-
-  We can instead read the logs line by line and do something with each row.
-
-  1. From remove.csv, create an object that maps the unique user pair to their most recent
-    "remove" transaction.
-
-  2. From accept.csv, create an array of unique user pairs who do not have a more recent
-    "remove" transaction.
-
-  Where
-    n is the number of rows in accept.csv
-    m is the number of rows in remove.csv
-    Time complexity:  O(n + m)
-    Space complexity: O(n)
-*/
-
 import { createReadStream } from 'fs';
 import { parse } from 'csv';
 import { resolve as resolvePath } from 'path';
-import { assertArrayEquals } from '../../util/AssertUtil';
-import { concatTokens } from '../../util/KeyGenerationUtil';
+import { assertArrayEquals } from '../../../util/AssertUtil';
+import { concatTokens } from '../../../util/KeyGenerationUtil';
 
 // options for the CSV parser
 const CSV_PARSER_OPTS = {
@@ -68,8 +11,8 @@ const CSV_PARSER_OPTS = {
 };
 
 // log file paths
-const LOGS_ACCEPT = './other/social-media-friendships/accept.csv';
-const LOGS_REMOVE = './other/social-media-friendships/remove.csv';
+const LOGS_ACCEPT = './challenges/other/social-media-friendships/accept.csv';
+const LOGS_REMOVE = './challenges/other/social-media-friendships/remove.csv';
 
 // CSV column keys
 const COLUMN_USER1 = 'user1';
