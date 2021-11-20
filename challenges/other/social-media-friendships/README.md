@@ -20,13 +20,13 @@ Each log file contains 3 columns:\
   `user2`
   `timestamp`
 
-#### Expected output
+### Expected output
 
 An array of arrays of user pairs\
 `[[user1, user2]]`
 
 
-#### Example
+### Example
 
 `appa` and `momo` are friends.\
 `hiphopapotamus` and `rhymenocerous` are friends.
@@ -34,7 +34,7 @@ An array of arrays of user pairs\
 Output:\
 `[['appa', 'momo'], ['hiphopapotamus', 'rhymenocerous']]`
 
-#### Considerations
+### Considerations
 
   * The logs are not guaranteed to be in order.
   * Result cannot contain duplicates.
@@ -42,8 +42,7 @@ Output:\
 
 ## My Approach
 
-##### An active friendship can be defined:
-
+An active friendship can be defined:
 * There exists a request between 2 users that was accepted.
 * There does not exist a remove transaction more recent than the latest accept transaction.
 
@@ -68,7 +67,7 @@ To ensure constant key length, we can add a hashing step after the join. I omitt
 simplicity. We can also assume that usernames have a relatively modest character limit, so the
 keys have an upper bound of how long they can become.
 
-#### Complexity
+### Complexity
 
 We read every row in `accept.csv` and `remove.csv` in all cases.
 
