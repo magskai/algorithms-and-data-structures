@@ -25,7 +25,9 @@ module.exports = {
   ],
   rules: {
     'no-console': 0,
-    "react/jsx-filename-extension": "off",
-    "allowForLoopAfterthoughts": true
+    'no-plusplus': [2, { allowForLoopAfterthoughts: true }],
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': [2, { 'functions': false }],
+    'react/jsx-filename-extension': 'off',
   },
 };

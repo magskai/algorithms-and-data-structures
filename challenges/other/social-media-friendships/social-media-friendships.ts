@@ -27,7 +27,7 @@ const RELATIONSHIP_KEY_DELIMITER = '^';
  *
  * @returns {Promise<string[][]>} array of user pairs
  */
- async function getAllActiveFriendships(): Promise<string[][]> {
+async function getAllActiveFriendships(): Promise<string[][]> {
   const friendshipRemoveMap: {} = await generateFriendshipRemoveMap();
   const friendships: string[][] = [];
 
@@ -50,7 +50,7 @@ const RELATIONSHIP_KEY_DELIMITER = '^';
  *
  * @returns {Promise<{}>} resolves to map of user pairs to timestamps
  */
- async function generateFriendshipRemoveMap(): Promise<{ [k: string]: number }> {
+async function generateFriendshipRemoveMap(): Promise<{ [k: string]: number }> {
   const friendshipToLatestRemove = {};
 
   const collectLatestRemoveRequests = (logRow: {}) => {
@@ -76,7 +76,7 @@ const RELATIONSHIP_KEY_DELIMITER = '^';
  * @param {Object}  logRow  row from log file
  * @returns {string}        key
  */
- function generateRelationshipKey(logRow: {}): string {
+function generateRelationshipKey(logRow: {}): string {
   const user1 = logRow[COLUMN_USER1];
   const user2 = logRow[COLUMN_USER2];
 
@@ -123,7 +123,7 @@ async function csvStream(relFilePath: string, rowFunction: (row: {}) => void): P
  *
  * @param {string[][]} friendships array of arrays of user pairs
  */
- function prettyPrintFriends(friendships: string[][]) {
+function prettyPrintFriends(friendships: string[][]) {
   const prettifyReducer = (prettified: string, friends: string[]): string => `${prettified}${friends[0]} and ${friends[1]}\n`;
 
   const prettifiedFriendships: string = friendships.reduce(prettifyReducer, 'Friends:\n');

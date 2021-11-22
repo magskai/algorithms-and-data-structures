@@ -1,8 +1,8 @@
-import { assertEquals } from "../../../util/AssertUtil";
+import { assertEquals } from '../../../util/AssertUtil';
 
 /**
  * Return the length of the longest substring in s without repeating characters.
- * 
+ *
  * @param {string}  s input string
  * @return {number}   length of longest substring
  */
@@ -16,7 +16,7 @@ function lengthOfLongestSubstring(s: string): number {
     const currentChar = s[i];
 
     // if we have seen this char since startIdx, start counting a new substring after it
-    if (charToLastSeenIdx.hasOwnProperty(currentChar)) {
+    if (charToLastSeenIdx[currentChar]) {
       startIdx = Math.max(startIdx, charToLastSeenIdx[currentChar] + 1);
     }
 
