@@ -1,4 +1,4 @@
-import { assertEquals } from './../../util/AssertUtil';
+import { assertEquals } from '../../util/AssertUtil';
 
 interface CakeType {
   value: number;
@@ -8,41 +8,48 @@ interface CakeType {
 /**
  * Return the maximum value of cakes that can fit inside a duffel bag, given a limited weight
  * capacity and CakeTypes with varying weight and value.
- * 
+ *
  * @param {CakeType}  cakeTypes       valuable, tasty, moneyful cakes
  * @param {number}    weightCapacity  weight limit that can be carried
  * @returns {number}                  maximum value of cakes
  */
 function maxDuffelBagValue(cakeTypes: CakeType[], weightCapacity: number): number {
   // initialize array to store the max value at each weight capacity by index
-  const maxCapacities = new Array(weightCapacity + 1).fill(0);
+  const maxValues = new Array(weightCapacity + 1).fill(0);
 
   for (let capacity = 1; capacity <= weightCapacity; capacity++) {
     // reuse the max value computed for -1 capacity
-    maxCapacities[capacity] = maxCapacities[capacity - 1];
+    maxValues[weightCapacity] = maxValues[weightCapacity - 1];
 
-    for (let cake of cakeTypes) {
-      const cakeWeight = cake.weight;
-      const cakeValue = cake.value;
+    cakeTypes.forEach((cake) => {
+      const valueWithCake = maxValueWithCake(cake, capacity, maxValues);
 
-      // if a cake is weightless and has a positive value, it's worth infinity moneys hooray
-      if (cakeWeight === 0 && cakeValue > 0) {
-        return Infinity;
-      }
-
-      // if the cake fits, calculate the max value if we take this cake
-      if (cakeWeight <= capacity) {
-        const remainingCapacityWithCake = capacity - cakeWeight;
-        const maxValueWithCake = maxCapacities[remainingCapacityWithCake] + cakeValue;
-
-        maxCapacities[capacity] = Math.max(maxCapacities[capacity], maxValueWithCake);
-      }
-    }
+      maxValues[capacity] = Math.max(maxValues[capacity], valueWithCake);
+    });
   }
 
-  return maxCapacities[weightCapacity];
+  return maxValues[weightCapacity];
 }
 
+function maxValueWithCake(cake: CakeType, weightCapacity: number, maxValues: number[]) {
+  const cakeWeight = cake.weight;
+  const cakeValue = cake.value;
+
+  // if a cake is weightless and has a positive value, we get infinity moneys hooray
+  if (cakeWeight === 0 && cakeValue > 0) {
+    return Infinity;
+  }
+
+  // if the cake fits, calculate the max value if we take this cake
+  if (cakeWeight <= weightCapacity) {
+    const remainingCapacityWithCake = weightCapacity - cakeWeight;
+
+    return maxValues[remainingCapacityWithCake] + cakeValue;
+  }
+
+  // cake does not fit, so there is no valid value with the cake
+  return -1;
+}
 
 // TESTS
 let desc = 'one cake';
@@ -53,7 +60,7 @@ assertEquals(actual, expected, desc);
 desc = 'two cakes';
 actual = maxDuffelBagValue([
   { weight: 4, value: 4 },
-  { weight: 5, value: 5}], 9);
+  { weight: 5, value: 5 }], 9);
 expected = 9;
 assertEquals(actual, expected, desc);
 
@@ -96,4 +103,4 @@ assertEquals(actual, expected, desc);
 
 desc = 'cake with non-zero value and zero weight';
 actual = maxDuffelBagValue([{ weight: 0, value: 5 }], 5);
-assertEquals(isFinite(actual), false, desc);
+assertEquals(Number.isFinite(actual), false, desc);
