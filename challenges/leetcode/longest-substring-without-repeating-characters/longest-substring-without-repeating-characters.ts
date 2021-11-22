@@ -1,4 +1,4 @@
-import { assertEquals } from "../../util/AssertUtil";
+import { assertEquals } from "../../../util/AssertUtil";
 
 /**
  * Return the length of the longest substring in s without repeating characters.
@@ -6,7 +6,7 @@ import { assertEquals } from "../../util/AssertUtil";
  * @param {string}  s input string
  * @return {number}   length of longest substring
  */
-const lengthOfLongestSubstring = (s: string): number => {
+function lengthOfLongestSubstring(s: string): number {
   // characters mapped to their last seen index
   const charToLastSeenIdx = {};
   let maxLength = 0;
@@ -31,7 +31,7 @@ const lengthOfLongestSubstring = (s: string): number => {
   }
 
   return maxLength;
-};
+}
 
 // TESTS
 let expected = lengthOfLongestSubstring('');
