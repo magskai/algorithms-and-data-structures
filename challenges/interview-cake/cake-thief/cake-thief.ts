@@ -1,4 +1,4 @@
-import { assertEquals } from '../../util/AssertUtil';
+import { assertEquals } from '../../../util/AssertUtil';
 
 interface CakeType {
   value: number;
