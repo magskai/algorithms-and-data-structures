@@ -77,7 +77,7 @@ cake2 = { value: 25, weight: 2 }
 currentCapacity = 4
 ```
 
-So far, we know:
+So far, we have calculated:
 | capacity | max value |
 | --- | --- |
 | 0 | 0 |
