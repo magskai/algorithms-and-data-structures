@@ -10,16 +10,16 @@ interface CakeType {
  * capacity and CakeTypes with varying weight and value.
  *
  * @param {CakeType}  cakeTypes       valuable, tasty, moneyful cakes
- * @param {number}    weightCapacity  weight limit that can be carried
+ * @param {number}    totalCapacity   weight limit that can be carried
  * @returns {number}                  maximum value of cakes
  */
-function maxDuffelBagValue(cakeTypes: CakeType[], weightCapacity: number): number {
+function maxDuffelBagValue(cakeTypes: CakeType[], totalCapacity: number): number {
   // initialize array to store the max value at each weight capacity by index
-  const maxValues = new Array(weightCapacity + 1).fill(0);
+  const maxValues = new Array(totalCapacity + 1).fill(0);
 
-  for (let capacity = 1; capacity <= weightCapacity; capacity++) {
+  for (let capacity = 1; capacity <= totalCapacity; capacity++) {
     // reuse the max value computed for -1 capacity
-    maxValues[weightCapacity] = maxValues[weightCapacity - 1];
+    maxValues[totalCapacity] = maxValues[totalCapacity - 1];
 
     cakeTypes.forEach((cake) => {
       const valueWithCake = maxValueWithCake(cake, capacity, maxValues);
@@ -28,10 +28,18 @@ function maxDuffelBagValue(cakeTypes: CakeType[], weightCapacity: number): numbe
     });
   }
 
-  return maxValues[weightCapacity];
+  return maxValues[totalCapacity];
 }
 
-function maxValueWithCake(cake: CakeType, weightCapacity: number, maxValues: number[]) {
+/**
+ * Return the maximum value achievable with the provided cake and capacity
+ *
+ * @param {CakeType}  cake      cake to take
+ * @param {number}    capacity  capacity of bag
+ * @param {number[]}  maxValues max values computed for incrementally smaller bags
+ * @returns                     max value with cake
+ */
+function maxValueWithCake(cake: CakeType, capacity: number, maxValues: number[]) {
   const cakeWeight = cake.weight;
   const cakeValue = cake.value;
 
@@ -41,8 +49,8 @@ function maxValueWithCake(cake: CakeType, weightCapacity: number, maxValues: num
   }
 
   // if the cake fits, calculate the max value if we take this cake
-  if (cakeWeight <= weightCapacity) {
-    const remainingCapacityWithCake = weightCapacity - cakeWeight;
+  if (cakeWeight <= capacity) {
+    const remainingCapacityWithCake = capacity - cakeWeight;
 
     return maxValues[remainingCapacityWithCake] + cakeValue;
   }
