@@ -43,8 +43,8 @@ Ok, what else can I use to build my output? What about the other argument? The `
 
 Let's say I pack a bag to the airline weight limits (my fellow over-packers, you understand me) and
 then the airline announces that they have raised the weight limit. I don't need to take everything
-out and put it all back in to determine which additional items I can bring (usually anyway - but
-this is a theoretical space where we're safe from horrible-shaped objects). I can pack more things
+out and put it all back in to determine which additional items I can bring (this is a
+theoretical space where we're safe from horrible-shaped objects). I can pack more things
 up to the new weight limit, and I can even remove items to make room for something heavy that is
 more valuable for my trip. Basically, I can work from my previous state instead of starting over.
 
